@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block title %} Dashboard Page {% endblock title %}
+
+
+{% block content %}
+    <h2>Dashboard page</h2>
+
+    <div class="row text-center">
+        <div class="col-sm-4">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for fm in form  %}
+                    {{fm.label_tag}} {{fm}} <span>{{fm.errors|striptags}}</span> <br>
+                {% endfor %}
+                
+                <input type="submit" value="Save">
+
+
+            </form>
+        </div>
+        <div class="col-sm-8">
+            <div class="row text-center">
+                {% for blog in blogs %}
+                    <div class="col-sm-6">
+                        <div class="card m-3">
+                            <img src={{blog.image.url}} class="card-img-top" style="height:30vh" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">{{blog.title}}</h5>
+                              <p class="card-text">{{blog.description}}</p>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <a href={% url 'update' blog.id %}> <button class="btn btn-sm btn-warning">Update</button> </a>
+                                <a href={% url 'delete' blog.id %}> <button class="btn btn-sm btn-danger">Delete</button> </a>
+
+                            </div>
+                          </div>
+                    </div>
+                {% endfor %}
+                
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

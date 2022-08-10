@@ -1,0 +1,41 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}User Login{% endblock title %}
+
+{% block msg %}
+    {% if messages %}
+        {% for msg in messages %}
+            <p class="alert alert-success text-center">{{msg}}</p>
+        
+        {% endfor %}
+    {% endif %}
+
+{% endblock msg %}
+
+{% block content %}
+    <form action="" method="POST" novalidate>
+        {% csrf_token %}
+        {% for fm in form %}
+            {{fm.label_tag}} {{fm}} <span class="text-danger">{{fm.errors|striptags}}</span> <br>
+        
+        {% endfor %}
+        <input type="submit" value="Submit" class="btn btn-sm btn-success">
+        <div>
+            <input type="reset" value="Reset" class="btn btn-sm btn-danger">
+            <input type="button" value="Cancel" class="btn btn-sm btn-warning">
+        </div>
+
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <p {% if error.tags %} class={{error.tags}} {% endif %}>{{error}}</p>
+            {% endfor %}
+        {% endif %}
+
+    </form>
+
+
+
+{% endblock content %}
+
+

@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block title %} Home Page {% endblock title %}
+
+
+{% block content %}
+    <h2>Home page</h2>
+
+    <div class="row text-center">
+        {% for blog in blogs %}
+            <div class="col-sm-4">
+                <div class="card m-3">
+                    <img src={{blog.image.url}} class="card-img-top" style="height:30vh" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{blog.title}}</h5>
+                      <p class="card-text">{{blog.description}}</p>
+                    </div>
+                  </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock content %}

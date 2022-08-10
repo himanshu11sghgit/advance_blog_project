@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block title %} Update Page {% endblock title %}
+
+
+{% block content %}
+
+
+
+<h2>Update page</h2>
+
+<div class="row text-center">
+    <div class="col-sm-8">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for fm in form  %}
+                {{fm.label_tag}} {{fm}} <span>{{fm.errors|striptags}}</span> <br>
+            {% endfor %}
+            
+            <input type="submit" value="Save">
+
+
+        </form>
+    </div>
+</div>
+
+
+
+
+{% endblock content %}
